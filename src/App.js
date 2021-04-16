@@ -6,9 +6,13 @@ import Movie from './Movie';
 
 import './App.css';
 
+const project = 'Movie Finder V2';
+
 const NotFound = () => {
   return <h2>404 Not Found</h2>;
 }
+
+document.querySelector('title').textContent = project;
 
 const App = () => {
   return (

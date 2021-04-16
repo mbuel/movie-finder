@@ -1,15 +1,6 @@
-const project = 'React Movie Finder V2';
-document.querySelector('title').textContent = project;
-
-const checkStatus = (response) => {
-  if (response.ok) {
-    // .ok returns true if response status is 200-299
-    return response;
-  }
-  throw new Error('Request was either a 404 or 500');
-}
-
-const json = (response) => response.json()
+import React from 'react';
+import { Link } from "react-router-dom";
+import { json, checkStatus } from './utils';
 
 const Movie = (props) => {
   const {
@@ -22,16 +13,16 @@ const Movie = (props) => {
 
   return (
     <div className="row">
-      <div className="col-4 col-md-3 mb-3">
-        <a href={`https://www.imdb.com/title/${imdbID}/`} target="_blank">
+      <div className="col-4 col-md-2 col-lg-1 mb-3">
+        <Link to={`/movie/${imdbID}/`}>
           <img src={Poster} className="img-fluid" />
-        </a>
+        </Link>
       </div>
-      <div className="col-8 col-md-9 mb-3">
-        <a href={`https://www.imdb.com/title/${imdbID}/`} target="_blank">
+      <div className="col-8 col-md-10 col-lg-11 mb-3">
+        <Link to={`/movie/${imdbID}/`}>
           <h4>{Title}</h4>
           <p>{Type} | {Year}</p>
-        </a>
+        </Link>
       </div>
     </div>
   )
@@ -71,6 +62,7 @@ class MovieFinder extends React.Component {
         }
 
         if (data.Response === 'True' && data.Search) {
+          console.log(data);
           this.setState({ results: data.Search, error: '' });
         }
       })
@@ -112,7 +104,4 @@ class MovieFinder extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <MovieFinder />,
-  document.getElementById('root')
-);
+export default MovieFinder;
